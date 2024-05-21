@@ -23,7 +23,11 @@ FLYING = false
 QEfly = true
 iyflyspeed = 1
 vehicleflyspeed = 1
-function sFLY(vfly)
+
+
+local Library = {}
+
+function Library:sFLY(vfly)
 	repeat wait() until Players.LocalPlayer and Players.LocalPlayer.Character and getRoot(Players.LocalPlayer.Character) and Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
 	repeat wait() until IYMouse
 	if flyKeyDown or flyKeyUp then flyKeyDown:Disconnect() flyKeyUp:Disconnect() end
@@ -108,7 +112,7 @@ function sFLY(vfly)
 	FLY()
 end
 
-function NOFLY()
+function Library:NOFLY()
 	FLYING = false
 	if flyKeyDown or flyKeyUp then flyKeyDown:Disconnect() flyKeyUp:Disconnect() end
 	if Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid') then
@@ -116,8 +120,6 @@ function NOFLY()
 	end
 	pcall(function() workspace.CurrentCamera.CameraType = Enum.CameraType.Custom end)
 end
-
-local Library = {}
 
 function Library:DraggingEnabled(frame, parent)
 
