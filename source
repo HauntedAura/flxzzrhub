@@ -880,20 +880,20 @@ end)
 
 xrayEnabled = false
 xray = function()
-    for _, v in pairs(workspace:GetDescendants()) do
-        if v:IsA("BasePart") and not v.Parent:FindFirstChildWhichIsA("Humanoid") and not v.Parent.Parent:FindFirstChildWhichIsA("Humanoid") then
-            v.LocalTransparencyModifier = xrayEnabled and 0.5 or 0
-        end
-    end
+	for _, v in pairs(workspace:GetDescendants()) do
+		if v:IsA("BasePart") and not v.Parent:FindFirstChildWhichIsA("Humanoid") and not v.Parent.Parent:FindFirstChildWhichIsA("Humanoid") then
+			v.LocalTransparencyModifier = xrayEnabled and 0.9 or 0
+		end
+	end
 end
 
 local XRay = Player:CreateToggle("XRay", 0.75, function(state)
-	if status then
+	if state then
 		xrayEnabled = true
-    		xray()
+		xray()
 	else
 		xrayEnabled = false
-    		xray()
+		xray()
 	end
 end)
 
