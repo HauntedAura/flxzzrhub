@@ -1,6 +1,7 @@
 local players = game:GetService("Players")
 local tweenService = game:GetService("TweenService")
 local runService = game:GetService("RunService")
+local coreGui = game:GetService("CoreGui")
 local uis = game:GetService("UserInputService")
 
 local lp = players.LocalPlayer
@@ -176,7 +177,7 @@ function Library:CreateLib(name)
 		GUI["1"]["ZIndexBehavior"] = Enum.ZIndexBehavior.Sibling;
 		GUI["1"]["IgnoreGuiInset"] = true
 		GUI["1"]["Name"] = name;
-		GUI["1"]["Parent"] = game.CoreGui;
+		GUI["1"]["Parent"] = coreGui;
 
 		GUI["2"] = Instance.new("Frame", GUI["1"]);
 		GUI["2"]["BorderSizePixel"] = 0;
@@ -823,7 +824,7 @@ end)
 local UsernameBox = Teleport:CreateTextbox("UsernameBox", "Username")
 
 local TeleportButton = Teleport:CreateButton("Teleport to Player", function()
-	local playerTeleportingTo = game.Players:FindFirstChild(game.Players.LocalPlayer.PlayerGui.flxzzrhub.Border.Container.Teleport.Container.UsernameBox.Text)
+	local playerTeleportingTo = game.Players:FindFirstChild(coreGui.flxzzrhub.Border.Container.Teleport.Container.UsernameBox.Text)
 	
 	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = playerTeleportingTo.Character.HumanoidRootPart.CFrame
 end)
@@ -955,10 +956,10 @@ local Hidden = false
 uis.InputBegan:Connect(function(input)
 	if input.KeyCode == Enum.KeyCode.H then
 		if Hidden then
-			game.CoreGui.flxzzrhub.Enabled = true
+			coreGui.flxzzrhub.Enabled = true
 			Hidden = false
 		else
-			game.CoreGui.flxzzrhub.Enabled = false
+			coreGui.flxzzrhub.Enabled = false
 			Hidden = true
 		end
 
@@ -969,16 +970,16 @@ while wait(5) do
 	for i, v in pairs(game.Players:GetPlayers()) do
 		if v.Backpack:FindFirstChild("Knife") then
 			if v == nil then
-				game.CoreGui.flxzzrhub.Border.Container.Misc["Murderer:"].Color.Text = "nil"
+				coreGui.flxzzrhub.Border.Container.Misc["Murderer:"].Color.Text = "nil"
 			else
-				game.CoreGui.flxzzrhub.Border.Container.Misc["Murderer:"].Color.Text = v.Name
+				coreGui.flxzzrhub.Border.Container.Misc["Murderer:"].Color.Text = v.Name
 				MurdererESP.Parent = v.Character
 			end
 		elseif v.Backpack:FindFirstChild("Gun") then
 			if v == nil then
-				game.CoreGui.flxzzrhub.Border.Container.Misc["Sheriff:"].Color.Text = "nil"
+				coreGui.flxzzrhub.Border.Container.Misc["Sheriff:"].Color.Text = "nil"
 			else
-				game.CoreGui.flxzzrhub.Border.Container.Misc["Sheriff:"].Color.Text = v.Name
+				coreGui.flxzzrhub.Border.Container.Misc["Sheriff:"].Color.Text = v.Name
 				SheriffPlayerESP.Parent = v.Character
 			end
 
@@ -986,9 +987,9 @@ while wait(5) do
 	end
 
 	if game.Workspace:FindFirstChild("GunDrop") then
-		game.CoreGui.flxzzrhub.Border.Container.Misc["Status:"].Color.Text = "Dropped"
+		coreGui.flxzzrhub.Border.Container.Misc["Status:"].Color.Text = "Dropped"
 	else
-		game.CoreGui.flxzzrhub.Border.Container.Misc["Status:"].Color.Text = "Not Dropped"
+		coreGui.flxzzrhub.Border.Container.Misc["Status:"].Color.Text = "Not Dropped"
 	end
 end
 
