@@ -173,11 +173,10 @@ function Library:CreateLib(name)
 	}
 
 	do
-		GUI["1"] = Instance.new("ScreenGui", game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui"));
+		GUI["1"] = Instance.new("ScreenGui", runService:IsStudio() and players.LocalPlayer:WaitForChild("PlayerGui") or coreGui);
 		GUI["1"]["ZIndexBehavior"] = Enum.ZIndexBehavior.Sibling;
 		GUI["1"]["IgnoreGuiInset"] = true
 		GUI["1"]["Name"] = name;
-		GUI["1"]["Parent"] = coreGui;
 
 		GUI["2"] = Instance.new("Frame", GUI["1"]);
 		GUI["2"]["BorderSizePixel"] = 0;
