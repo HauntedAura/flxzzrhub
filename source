@@ -790,15 +790,15 @@ local Map = Teleport:CreateButton("Map", 0.4, function()
 	end
 end)
 
-local GunDrop = Teleport:CreateButton("Gun Drop", 0.5, function()
+local GunDrop = Teleport:CreateButton("Gun Drop", 0.55, function()
 	if game.Workspace:FindFirstChild("GunDrop") then
 		game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame = CFrame.new(game.Workspace:FindFirstChild("GunDrop").Position)
 	end
 end)
 
-local UsernameBox = Teleport:CreateTextbox("UsernameBox", 0.65, "Username")
+local UsernameBox = Teleport:CreateTextbox("UsernameBox", 0.7, "Username")
 
-local TeleportButton = Teleport:CreateButton("Teleport to Player", 0.8, function()
+local TeleportButton = Teleport:CreateButton("Teleport to Player", 0.85, function()
 	local playerTeleportingTo = game.Players:FindFirstChild(coreGui.flxzzrhub.Border.Container.Teleport.Container.UsernameBox.Text)
 	
 	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = playerTeleportingTo.Character.HumanoidRootPart.CFrame
