@@ -792,7 +792,7 @@ local Teleport = Window:CreateSection("Teleport", 158, 150, 172, 7)
 local Visuals = Window:CreateSection("Visuals", 158, 100, 7, 214)
 local Misc = Window:CreateSection("Misc", 158, 100, 172, 164)
 
-local Lobby = Teleport:CreateButton("Lobby", 0.25, function()
+local Lobby = Teleport:CreateButton("Lobby", 0.15, function()
 	for i, v in pairs(game.Workspace.Lobby.Spawns:GetChildren()) do
 		if v:IsA("SpawnLocation") then
 			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(v.Position)
@@ -800,7 +800,7 @@ local Lobby = Teleport:CreateButton("Lobby", 0.25, function()
 	end
 end)
 
-local Map = Teleport:CreateButton("Map", 0.4, function()
+local Map = Teleport:CreateButton("Map", 0.3, function()
 	for i, v in pairs(game.Workspace.Normal.Spawns:GetChildren()) do
 		if v:IsA("BasePart") then
 			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(v.Position)
@@ -808,18 +808,26 @@ local Map = Teleport:CreateButton("Map", 0.4, function()
 	end
 end)
 
-local GunDrop = Teleport:CreateButton("Gun Drop", 0.55, function()
+local GunDrop = Teleport:CreateButton("Gun Drop", 0.45, function()
 	if game.Workspace:FindFirstChild("GunDrop") then
 		game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame = CFrame.new(game.Workspace:FindFirstChild("GunDrop").Position)
 	end
 end)
 
-local UsernameBox = Teleport:CreateTextbox("UsernameBox", 0.7, "Username")
+local UsernameBox = Teleport:CreateTextbox("UsernameBox", 0.6, "Username")
 
-local TeleportButton = Teleport:CreateButton("Teleport to Player", 0.85, function()
+local TeleportButton = Teleport:CreateButton("Teleport to Player", 0.75, function()
 	local playerTeleportingTo = game.Players:FindFirstChild(coreGui.flxzzrhub.Border.Container.Teleport.Container.UsernameBox.Text)
 	
 	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = playerTeleportingTo.Character.HumanoidRootPart.CFrame
+end)
+
+local RareEgg = Teleport:CreateButton("Rare Egg"), 0.9, function()
+	 for i, v in pairs(game.Workspace.Normal.CoinContainer:GetChildren()) do
+    		if v:FindFirstChild("ParticleEmitter") then
+        		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(v.Position)
+		end
+    	end
 end)
 
 local MurdererPlayer = nil
