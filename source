@@ -166,6 +166,18 @@ end
 
 function Library:CreateLib(name)
 
+	for i, v in pairs(workspace:GetDescendants()) do
+		if v.Name == "MurdererESP" or v.Name == "SheriffPlayerESP" then
+			v:Destroy()
+		end
+
+		if v:IsA("BasePart") then
+				if v:FindFirstChild("OriginalTransparency") then
+					v:FindFirstChild("OriginalTransparency"):Destroy()
+				end
+		end
+	end
+
 	local GUI = {
 		Hover = false,
 		MouseDown = false,
