@@ -860,9 +860,9 @@ end)
 
 local Fly = Player:CreateToggle("Fly", 0.25, function(state)
 	if state then
-		sFLY()
+		Library:sFLY()
 	else
-		NOFLY()
+		Library:NOFLY()
 	end
 end)
 
