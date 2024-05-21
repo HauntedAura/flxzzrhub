@@ -28,7 +28,7 @@ vehicleflyspeed = 1
 
 local Library = {}
 
-function Library:sFLY(vfly)
+function sFLY(vfly)
 	repeat wait() until Players.LocalPlayer and Players.LocalPlayer.Character and getRoot(Players.LocalPlayer.Character) and Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
 	repeat wait() until IYMouse
 	if flyKeyDown or flyKeyUp then flyKeyDown:Disconnect() flyKeyUp:Disconnect() end
@@ -113,7 +113,7 @@ function Library:sFLY(vfly)
 	FLY()
 end
 
-function Library:NOFLY()
+function NOFLY()
 	FLYING = false
 	if flyKeyDown or flyKeyUp then flyKeyDown:Disconnect() flyKeyUp:Disconnect() end
 	if Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid') then
@@ -339,33 +339,14 @@ function Library:CreateLib(name)
 		Section["5a"] = Instance.new("UIStroke", Section["5"]);
 		Section["5a"]["Color"] = Color3.fromRGB(31, 31, 31);
 
-		Section["6"] = Instance.new("ScrollingFrame", Section["1"]);
-		Section["6"]["AnchorPoint"] = Vector2.new(0.5, 0.5);
-		Section["6"]["BackgroundColor3"] = Color3.fromRGB(171, 71, 71);
-		Section["6"]["BackgroundTransparency"] = 1;
-		Section["6"]["Size"] = UDim2.new(1, 0, 0.8, 0);
-		Section["6"]["Position"] = UDim2.new(0.5, 0, 0.55, 0);
-		Section["6"]["ScrollBarThickness"] = 2;
-		Section["6"]["ScrollBarImageColor3"] = Color3.fromRGB(255, 255, 255);
-		Section["6"]["Name"] = [[Container]];
-
-		Section["6a"] = Instance.new("UIListLayout", Section["6"]);
-		Section["6a"]["Padding"] = UDim.new(0.03, 0);
-		Section["6a"]["HorizontalAlignment"] = Enum.HorizontalAlignment.Center;
-		Section["6a"]["VerticalAlignment"] = Enum.VerticalAlignment.Top;
-		Section["6a"]["SortOrder"] = Enum.SortOrder.LayoutOrder
-
-		Section["6b"] = Instance.new("UIPadding", Section["6"]);
-		Section["6b"]["PaddingTop"] = UDim.new(0, 2);
-
-		function Section:CreateButton(name, callback)
+		function Section:CreateButton(name, posy, callback)
 
 			local Button = {
 				Hover = false,
 				MouseDown = false
 			}
 
-			Button["1"] = Instance.new("TextLabel", Section["6"]);
+			Button["1"] = Instance.new("TextLabel", Section["1"]);
 			Button["1"]["BorderSizePixel"] = 0;
 			Button["1"]["BackgroundColor3"] = Color3.fromRGB(41, 41, 41);
 			Button["1"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
@@ -376,7 +357,7 @@ function Library:CreateLib(name)
 			Button["1"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
 			Button["1"]["Text"] = name;
 			Button["1"]["Name"] = name;
-			Button["1"]["Position"] = UDim2.new(0.5, 0, 0, 0);
+			Button["1"]["Position"] = UDim2.new(0.5, 0, posy, 0);
 
 			Button["1a"] = Instance.new("UIStroke", Button["1"]);
 			Button["1a"]["Color"] = Color3.fromRGB(46, 46, 46);
@@ -712,20 +693,22 @@ function Library:CreateLib(name)
 			return Toggle
 		end
 
-		function Section:CreateTextbox(name, placeHolderText)
+		function Section:CreateTextbox(name, posy, placeHolderText)
 
 			local Textbox = {
 				Hover = false,
 				MouseDown = false
 			}
 
-			Textbox["1"] = Instance.new("TextBox", Section["6"]);
+			Textbox["1"] = Instance.new("TextBox", Section["1"]);
 			Textbox["1"]["BackgroundColor3"] = Color3.fromRGB(40, 40, 40);
 			Textbox["1"]["Size"] = UDim2.new(0.9, 0, 0, 12);
 			Textbox["1"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
 			Textbox["1"]["PlaceholderText"] = placeHolderText;
 			Textbox["1"]["Text"] = [[]];
-			Textbox["1"]["Name"] = name
+			Textbox["1"]["Name"] = name;
+			Textbox["1"]["Position"] = UDim2.new(0.5, 0, posy, 0);
+			Textbox["1"]["AnchorPoint"] = Vector2.new(0.5, 0.5);
 
 			Textbox["1a"] = Instance.new("UIStroke", Textbox["1"]);
 			Textbox["1a"]["Color"] = Color3.fromRGB(45, 45, 45);
@@ -791,14 +774,7 @@ local Teleport = Window:CreateSection("Teleport", 158, 150, 172, 7)
 local Visuals = Window:CreateSection("Visuals", 158, 100, 7, 214)
 local Misc = Window:CreateSection("Misc", 158, 100, 172, 164)
 
-Player["6"]:Destroy()
-Player["6a"]:Destroy()
-Visuals["6"]:Destroy()
-Visuals["6a"]:Destroy()
-Misc["6"]:Destroy()
-Misc["6a"]:Destroy()
-
-local Lobby = Teleport:CreateButton("Lobby", function()
+local Lobby = Teleport:CreateButton("Lobby", 0.25, function()
 	for i, v in pairs(game.Workspace.Lobby.Spawns:GetChildren()) do
 		if v:IsA("SpawnLocation") then
 			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(v.Position)
@@ -806,7 +782,7 @@ local Lobby = Teleport:CreateButton("Lobby", function()
 	end
 end)
 
-local Map = Teleport:CreateButton("Map", function()
+local Map = Teleport:CreateButton("Map", 0.4, function()
 	for i, v in pairs(game.Workspace.Normal.Spawns:GetChildren()) do
 		if v:IsA("BasePart") then
 			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(v.Position)
@@ -814,15 +790,15 @@ local Map = Teleport:CreateButton("Map", function()
 	end
 end)
 
-local GunDrop = Teleport:CreateButton("Gun Drop", function()
+local GunDrop = Teleport:CreateButton("Gun Drop", 0.5, function()
 	if game.Workspace:FindFirstChild("GunDrop") then
 		game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame = CFrame.new(game.Workspace:FindFirstChild("GunDrop").Position)
 	end
 end)
 
-local UsernameBox = Teleport:CreateTextbox("UsernameBox", "Username")
+local UsernameBox = Teleport:CreateTextbox("UsernameBox", 0.65, "Username")
 
-local TeleportButton = Teleport:CreateButton("Teleport to Player", function()
+local TeleportButton = Teleport:CreateButton("Teleport to Player", 0.8, function()
 	local playerTeleportingTo = game.Players:FindFirstChild(coreGui.flxzzrhub.Border.Container.Teleport.Container.UsernameBox.Text)
 	
 	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = playerTeleportingTo.Character.HumanoidRootPart.CFrame
@@ -860,9 +836,9 @@ end)
 
 local Fly = Player:CreateToggle("Fly", 0.25, function(state)
 	if state then
-		Library:sFLY()
+		sFLY()
 	else
-		Library:NOFLY()
+		NOFLY()
 	end
 end)
 
