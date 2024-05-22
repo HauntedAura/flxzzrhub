@@ -822,14 +822,6 @@ local TeleportButton = Teleport:CreateButton("Teleport to Player", 0.75, functio
 	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = playerTeleportingTo.Character.HumanoidRootPart.CFrame
 end)
 
-local RareEgg = Teleport:CreateButton("Rare Egg"), 0.9, function()
-	 for i, v in pairs(game.Workspace.Normal.CoinContainer:GetChildren()) do
-    		if v:FindFirstChild("ParticleEmitter") then
-        		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(v.Position)
-		end
-    	end
-end)
-
 local MurdererPlayer = nil
 local SheriffPlayer = nil
 
