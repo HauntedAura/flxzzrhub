@@ -817,7 +817,7 @@ end)
 local UsernameBox = Teleport:CreateTextbox("UsernameBox", 0.6, "Username")
 
 local TeleportButton = Teleport:CreateButton("Teleport to Player", 0.75, function()
-	local playerTeleportingTo = game.Players:FindFirstChild(coreGui.flxzzrhub.Border.Container.Teleport.Container.UsernameBox.Text)
+	local playerTeleportingTo = game.Players:FindFirstChild(coreGui.flxzzrhub.Border.Container.Teleport.UsernameBox.Text)
 	
 	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = playerTeleportingTo.Character.HumanoidRootPart.CFrame
 end)
